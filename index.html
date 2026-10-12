@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0a0a0a">
+  <meta name="description" content="PHOTO STUDIO — преміальна фотографія. Портрети, весілля, love story, події та комерційні зйомки.">
+  <title>PHOTO STUDIO — Преміальна фотографія</title>
+  <link rel="preconnect" href="https://images.unsplash.com">
+  <style>
+    :root{--bg:#090909;--panel:#121212;--panel2:#181818;--gold:#d7b56d;--gold2:#f0d79c;--white:#f7f3eb;--muted:#aaa39a;--line:#30291d}
+    *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:85px}body{margin:0;background:var(--bg);color:var(--white);font-family:Inter,Arial,sans-serif;line-height:1.6}body.lock{overflow:hidden}
+    a{color:inherit;text-decoration:none}button,input,select,textarea{font:inherit}button{cursor:pointer}
+    .wrap{width:min(1160px,90%);margin:auto}.gold{color:var(--gold)}.eyebrow{text-transform:uppercase;letter-spacing:.24em;font-size:.74rem;color:var(--gold)}
+    header{position:sticky;top:0;z-index:20;background:#090909eF;border-bottom:1px solid #ffffff12;backdrop-filter:blur(14px)}
+    .nav{height:78px;display:flex;align-items:center;justify-content:space-between;gap:24px}.brand{font-size:1.05rem;font-weight:800;letter-spacing:.19em}.brand span{color:var(--gold)}
+    nav{display:flex;gap:26px;align-items:center}nav a{font-size:.88rem;color:#d8d2c7}nav a:hover{color:var(--gold)}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--gold);background:var(--gold);color:#15110a;padding:12px 19px;font-weight:700;transition:.2s;border-radius:2px}.btn:hover{background:transparent;color:var(--gold)}.btn.outline{background:transparent;color:var(--gold)}.btn.outline:hover{background:var(--gold);color:#15110a}
+    .menu{display:none;background:none;color:var(--white);border:1px solid var(--line);padding:8px 12px}
+    .hero{min-height:690px;display:grid;align-items:center;position:relative;isolation:isolate;background:linear-gradient(90deg,#050505f2 0%,#050505bd 48%,#05050530 100%),url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=2000&q=90') center 35%/cover}
+    .hero:after{content:"";position:absolute;inset:auto 0 0;height:120px;background:linear-gradient(transparent,var(--bg));z-index:-1}.hero-content{max-width:700px;padding:90px 0}
+    h1{font-size:clamp(3.1rem,8vw,6.7rem);line-height:.98;letter-spacing:-.055em;margin:22px 0}h1 em{font-style:normal;color:var(--gold)}.hero p{max-width:520px;color:#d4cec4;font-size:1.08rem;margin:26px 0 32px}.actions{display:flex;gap:12px;flex-wrap:wrap}
+    .hero-note{display:flex;gap:24px;margin-top:55px;color:#d0c8bc;font-size:.83rem}.hero-note span{border-left:1px solid var(--gold);padding-left:12px}
+    section{padding:95px 0}.section-head{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:34px}.section-head h2,.about h2,.contact h2{font-size:clamp(2rem,4vw,3.6rem);line-height:1.1;letter-spacing:-.04em;margin:10px 0}.section-head p{max-width:440px;color:var(--muted);margin:0}
+    .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.shot{position:relative;overflow:hidden;aspect-ratio:4/5;background:var(--panel2);border:1px solid #ffffff0a}.shot img{width:100%;height:100%;display:block;object-fit:cover;transition:transform .55s,filter .4s;filter:saturate(.86)}.shot:hover img{transform:scale(1.045);filter:saturate(1)}.shot .shade{position:absolute;inset:30% 0 0;background:linear-gradient(transparent,#000b);pointer-events:none}.shot .label{position:absolute;left:18px;bottom:17px;right:18px;display:flex;justify-content:space-between;align-items:end;gap:10px}.label strong{font-size:1.1rem}.label small{color:var(--gold)}
+    .center{text-align:center;margin-top:30px}.soft{background:linear-gradient(180deg,#0b0b0b,#11100e,#0b0b0b);border-block:1px solid #ffffff0a}
+    .prices{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.price-card{padding:29px;background:linear-gradient(145deg,#171613,#0e0e0e);border:1px solid #3b3222;position:relative}.price-card.featured{border-color:var(--gold);box-shadow:0 0 35px #d7b56d0a}.tag{position:absolute;right:18px;top:18px;color:#17110a;background:var(--gold);padding:4px 9px;font-size:.68rem;text-transform:uppercase;letter-spacing:.08em}.price-card h3{font-size:1.35rem;margin:0 0 7px}.price-card p{color:var(--muted);margin:0}.price{font-size:2.25rem;color:var(--gold);margin:19px 0}.price small{font-size:.85rem;color:var(--muted)}.price-card ul{list-style:none;padding:0;margin:22px 0 26px;color:#d2ccc2}.price-card li{padding:7px 0;border-bottom:1px solid #ffffff0b}.price-card li:before{content:"✦";color:var(--gold);margin-right:10px}
+    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}.about-photo{position:relative;min-height:490px}.about-photo img{position:absolute;width:82%;height:90%;object-fit:cover;right:0;top:0}.about-photo:before{content:"";position:absolute;width:55%;height:65%;left:0;bottom:0;border:1px solid var(--gold);z-index:-1}.about p{color:var(--muted);margin:20px 0}.stats{display:flex;gap:32px;margin-top:30px}.stats strong{display:block;font-size:1.65rem;color:var(--gold)}.stats span{font-size:.8rem;color:var(--muted)}
+    .booking-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:50px}.contact-copy p{color:var(--muted);max-width:390px}.contact-item{margin-top:23px}.contact-item small{display:block;color:var(--gold);text-transform:uppercase;letter-spacing:.12em}.contact-item a{font-size:1.05rem}
+    form{background:var(--panel);border:1px solid #30291d;padding:28px;display:grid;grid-template-columns:1fr 1fr;gap:16px}form label{display:block;font-size:.82rem;color:#d7d0c5;margin-bottom:7px}form .full{grid-column:1/-1}input,select,textarea{width:100%;background:#090909;border:1px solid #39352d;color:var(--white);padding:12px 13px;border-radius:2px;outline:none}input:focus,select:focus,textarea:focus{border-color:var(--gold)}textarea{resize:vertical;min-height:100px}form .btn{width:100%}.form-note{font-size:.75rem;color:var(--muted);margin:0}
+    footer{border-top:1px solid #ffffff12;padding:27px 0;color:var(--muted);font-size:.82rem}.footer-row{display:flex;justify-content:space-between;gap:20px;align-items:center}.social{display:flex;gap:18px}.social a:hover{color:var(--gold)}
+    .admin-fab{position:fixed;right:18px;bottom:18px;z-index:30;background:#18150f;color:var(--gold);border:1px solid #6d572f;padding:10px 14px;font-size:.8rem;opacity:.82}.admin-fab:hover{opacity:1}
+    dialog{width:min(760px,92vw);max-height:88vh;overflow:auto;background:#111;color:var(--white);border:1px solid var(--gold);padding:0}dialog::backdrop{background:#000c;backdrop-filter:blur(4px)}.modal-head{display:flex;justify-content:space-between;align-items:center;padding:18px 22px;border-bottom:1px solid var(--line)}.modal-head h3{margin:0}.close{background:none;color:var(--white);border:1px solid #555;padding:5px 10px}.admin-body{padding:22px}.admin-body p,.admin-body li{color:var(--muted)}.admin-form{padding:0;border:0;background:none;grid-template-columns:1fr 1fr}.admin-list{display:grid;gap:10px;margin-top:20px}.admin-row{display:flex;align-items:center;gap:12px;background:#1b1b1b;padding:9px}.admin-row img{width:58px;height:58px;object-fit:cover}.admin-row .grow{flex:1;min-width:0}.admin-row small{display:block;overflow-wrap:anywhere;color:var(--muted)}.danger{background:transparent;color:#ff9b91;border:1px solid #75433e;padding:8px}
+    .notice{border-left:3px solid var(--gold);background:#211c12;padding:12px 14px;color:#e7d9b9;font-size:.85rem;margin:16px 0}.empty{color:var(--muted);padding:20px;border:1px dashed #494133;text-align:center}
+    @media(max-width:800px){nav{display:none;position:absolute;top:78px;left:0;right:0;background:#0b0b0b;padding:22px 5%;flex-direction:column;align-items:start;border-bottom:1px solid var(--line)}nav.open{display:flex}.menu{display:block}.nav>.btn{display:none}.hero{min-height:620px;background-position:60% center}.gallery{grid-template-columns:repeat(2,1fr)}.prices{grid-template-columns:1fr}.about-grid,.booking-grid{grid-template-columns:1fr;gap:35px}.about-photo{min-height:390px}.section-head{display:block}.section-head p{margin-top:14px}.footer-row{flex-direction:column;text-align:center}}
+    @media(max-width:480px){.wrap{width:91%}section{padding:70px 0}.gallery{gap:8px}.shot .label{left:10px;right:10px;bottom:10px}.label strong{font-size:.9rem}.label small{font-size:.7rem}.hero-note{gap:12px;flex-wrap:wrap}.hero-note span{font-size:.75rem}form{grid-template-columns:1fr;padding:18px}.form .full{grid-column:auto}.admin-form{grid-template-columns:1fr}.stats{gap:20px}}
+  </style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#home">PHOTO <span>STUDIO</span></a>
+    <nav id="navLinks">
+      <a href="#portfolio">Портфоліо</a><a href="#services">Послуги та ціни</a><a href="#about">Про мене</a><a href="#booking">Запис</a>
+    </nav>
+    <a class="btn" href="#booking">Забронювати</a>
+    <button class="menu" id="menuBtn" aria-label="Відкрити меню">☰</button>
+  </div>
+</header>
+
+<main>
+  <section class="hero" id="home">
+    <div class="wrap hero-content">
+      <div class="eyebrow">Фотографія з характером</div>
+      <h1>Миті, що<br>стають <em>вічними.</em></h1>
+      <p>Преміальна фотографія для людей, історій та брендів. Збережемо ваші справжні емоції у кадрах, до яких хочеться повертатися.</p>
+      <div class="actions"><a class="btn" href="#portfolio">Переглянути роботи ↗</a><a class="btn outline" href="#booking">Записатися на зйомку</a></div>
+      <div class="hero-note"><span>Портрети та fashion</span><span>Весілля та love story</span><span>Події й бренди</span></div>
+    </div>
+  </section>
+
+  <section id="portfolio">
+    <div class="wrap">
+      <div class="section-head"><div><div class="eyebrow">Вибрані кадри</div><h2>Портфоліо</h2></div><p>Світло, настрій та деталі — кожна зйомка має власну історію. Натисніть на фото, щоб відкрити його у повному розмірі.</p></div>
+      <div class="gallery" id="gallery"></div>
+      <div class="center"><a class="btn outline" href="#booking">Створімо вашу історію</a></div>
+    </div>
+  </section>
+
+  <section class="soft" id="services">
+    <div class="wrap">
+      <div class="section-head"><div><div class="eyebrow">Індивідуальний підхід</div><h2>Послуги та ціни</h2></div><p>Оберіть пакет або залиште заявку — підберемо формат, локацію та настрій саме для вас.</p></div>
+      <div class="prices" id="prices"></div>
+      <p class="form-note" style="margin-top:18px">* Ціни демонстраційні. Перед публікацією змініть їх на свої актуальні тарифи.</p>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap about-grid">
+      <div class="about-photo"><img src="https://images.unsplash.com/photo-1542038784456-1ea8e935640e?auto=format&fit=crop&w=1000&q=85" alt="Фотограф працює з камерою" loading="lazy"></div>
+      <div class="about"><div class="eyebrow">За кожним кадром — людина</div><h2>Не просто фото.<br><span class="gold">Ваші відчуття.</span></h2><p>PHOTO STUDIO — простір для щирих емоцій, стильних портретів і важливих моментів. Допомагаю з ідеєю, позуванням та вибором локації, щоб перед камерою було легко бути собою.</p><p>Працюю з різними форматами: від персональної зйомки до весіль, подій і контенту для брендів.</p><div class="stats"><div><strong>100%</strong><span>уваги до деталей</span></div><div><strong>1:1</strong><span>індивідуальний підхід</span></div><div><strong>∞</strong><span>історій у кадрі</span></div></div></div>
+    </div>
+  </section>
+
+  <section class="soft" id="booking">
+    <div class="wrap booking-grid">
+      <div class="contact-copy"><div class="eyebrow">Почнемо з розмови</div><h2>Забронюйте<br><span class="gold">свою дату.</span></h2><p>Заповніть форму, і ми зможемо обговорити формат, бажану дату та ваші ідеї.</p>
+        <div class="contact-item"><small>Instagram</small><a href="https://instagram.com/" target="_blank" rel="noopener" id="instagramLink">@ваш_акаунт</a></div>
+        <div class="contact-item"><small>Телефон</small><a href="tel:+380000000000" id="phoneLink">+380 XX XXX XX XX</a></div>
+        <div class="contact-item"><small>Локація</small><span id="locationText">Україна · за домовленістю</span></div>
+      </div>
+      <form id="bookingForm">
+        <div><label for="clientName">Ваше ім'я *</label><input id="clientName" name="name" required placeholder="Як до вас звертатися?"></div>
+        <div><label for="clientPhone">Телефон або Telegram *</label><input id="clientPhone" name="phone" required placeholder="+380..." ></div>
+        <div><label for="shootType">Тип зйомки *</label><select id="shootType" name="type" required><option value="">Оберіть послугу</option><option>Портретна</option><option>Весільна</option><option>Love story</option><option>Сімейна</option><option>Fashion / модельна</option><option>Подія</option><option>Контент для бренду</option><option>Інше</option></select></div>
+        <div><label for="shootDate">Бажана дата</label><input id="shootDate" name="date" type="date"></div>
+        <div class="full"><label for="details">Розкажіть про вашу ідею</label><textarea id="details" name="details" placeholder="Локація, побажання, кількість людей..."></textarea></div>
+        <div class="full"><button class="btn" type="submit">Підготувати заявку ↗</button></div>
+        <p class="form-note full">Форма відкриє ваш поштовий застосунок для надсилання заявки. Щоб заявки зберігалися автоматично, підключіть сервіс форм або сервер — див. README.</p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap footer-row"><a class="brand" href="#home">PHOTO <span>STUDIO</span></a><span>© <span id="year"></span> PHOTO STUDIO. Усі права захищені.</span><div class="social"><a href="https://instagram.com/" target="_blank" rel="noopener">Instagram ↗</a><a href="#booking">Запис</a></div></div></footer>
+
+<button class="admin-fab" id="adminOpen">⚙ Адмін-панель</button>
+<dialog id="adminDialog">
+  <div class="modal-head"><h3>Адмін-панель PHOTO STUDIO</h3><button class="close" id="adminClose">Закрити ✕</button></div>
+  <div class="admin-body">
+    <div class="notice"><strong>Демо-режим:</strong> зміни зберігаються лише у цьому браузері на цьому пристрої. Це не захищена серверна адмінка і не синхронізується між відвідувачами сайту.</div>
+    <h4>Додати фото до галереї</h4>
+    <form class="admin-form" id="photoForm">
+      <div><label for="photoTitle">Назва фото</label><input id="photoTitle" required placeholder="Наприклад, Портрет"></div>
+      <div><label for="photoCategory">Категорія</label><select id="photoCategory"><option>Портрети</option><option>Весілля</option><option>Love story</option><option>Fashion</option><option>Сімейна</option><option>Події</option><option>Бренди</option></select></div>
+      <div class="full"><label for="photoFile">Обрати фото з комп’ютера</label><input id="photoFile" type="file" accept="image/*"><small style="display:block;color:var(--muted);margin-top:6px">Або встав посилання на фото нижче. Фото автоматично зменшується для збереження.</small></div>
+      <div class="full"><label for="photoUrl">Посилання на фото (необов’язково)</label><input id="photoUrl" type="url" placeholder="https://..."></div>
+      <div class="full"><button class="btn" type="submit">Додати фото</button></div>
+    </form>
+    <h4 style="margin-top:28px">Керування галереєю</h4>
+    <div id="adminList" class="admin-list"></div>
+    <h4 style="margin-top:28px">Контакти сайту</h4>
+    <form class="admin-form" id="settingsForm">
+      <div><label for="setInstagram">Instagram URL</label><input id="setInstagram" type="url" placeholder="https://instagram.com/username"></div>
+      <div><label for="setInstagramName">Instagram назва</label><input id="setInstagramName" placeholder="@username"></div>
+      <div><label for="setPhone">Телефон</label><input id="setPhone" placeholder="+380..."></div>
+      <div><label for="setLocation">Місто / локація</label><input id="setLocation" placeholder="Ваше місто"></div>
+      <div class="full"><button class="btn" type="submit">Зберегти контакти</button></div>
+    </form>
+    <p class="form-note">Для справжнього публічного сайту використовуйте захищену адмін-панель із авторизацією та базою даних. Не зберігайте паролі чи секрети в цьому HTML-файлі.</p>
+  </div>
+</dialog>
+
+<script>
+const initialPhotos = [
+  {title:"Портрет",category:"Портрети",url:"https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1100&q=85"},
+  {title:"Весільна історія",category:"Весілля",url:"https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1100&q=85"},
+  {title:"Fashion",category:"Fashion",url:"https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1100&q=85"},
+  {title:"Love story",category:"Love story",url:"https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1100&q=85"},
+  {title:"На природі",category:"Портрети",url:"https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1100&q=85"},
+  {title:"Стиль",category:"Fashion",url:"https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1100&q=85"}
+];
+const priceData = [
+ {name:"Міні",desc:"Коротка персональна зйомка",price:"1 000",unit:"грн",items:["30 хвилин зйомки","10 фото в авторській обробці","Допомога з позуванням"]},
+ {name:"Стандарт",desc:"Для портретів та love story",price:"2 000",unit:"грн",items:["60 хвилин зйомки","25 фото в авторській обробці","Допомога з образами"],featured:true},
+ {name:"Преміум",desc:"Для подій та особливих історій",price:"4 000",unit:"грн",items:["До 2 годин зйомки","50 фото в авторській обробці","Індивідуальна концепція"]}
+];
+const $ = id => document.getElementById(id);
+const escapeHtml = value => String(value).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+function loadPhotos(){try{return JSON.parse(localStorage.getItem("photoStudioPhotos"))||initialPhotos.slice()}catch{return initialPhotos.slice()}}
+let photos=loadPhotos();
+function savePhotos(){try{localStorage.setItem("photoStudioPhotos",JSON.stringify(photos))}catch{alert("Не вдалося зберегти. Можливо, перевищено ліміт локального сховища.")}}
+function renderGallery(){
+  $("gallery").innerHTML=photos.map((p,i)=>`<a class="shot" href="${escapeHtml(p.url)}" target="_blank" rel="noopener" aria-label="Відкрити фото: ${escapeHtml(p.title)}"><img src="${escapeHtml(p.url)}" alt="${escapeHtml(p.title)}" loading="lazy" onerror="this.alt='Не вдалося завантажити фото';this.style.opacity='.25'"><span class="shade"></span><span class="label"><strong>${escapeHtml(p.title)}</strong><small>${escapeHtml(p.category)}</small></span></a>`).join("");
+  $("adminList").innerHTML=photos.length?photos.map((p,i)=>`<div class="admin-row"><img src="${escapeHtml(p.url)}" alt=""><div class="grow"><strong>${escapeHtml(p.title)}</strong><small>${escapeHtml(p.category)} · ${escapeHtml(p.url)}</small></div><button class="danger" data-delete="${i}">Видалити</button></div>`).join(""):'<div class="empty">Галерея порожня.</div>';
+}
+function renderPrices(){
+ $("prices").innerHTML=priceData.map(p=>`<article class="price-card ${p.featured?'featured':''}">${p.featured?'<span class="tag">Популярний</span>':''}<h3>${p.name}</h3><p>${p.desc}</p><div class="price">${p.price} <small>${p.unit}</small></div><ul>${p.items.map(x=>`<li>${x}</li>`).join("")}</ul><a class="btn ${p.featured?'':'outline'}" href="#booking" data-package="${p.name}">Обрати пакет</a></article>`).join("");
+}
+renderGallery();renderPrices();$("year").textContent=new Date().getFullYear();
+$("menuBtn").addEventListener("click",()=>$("navLinks").classList.toggle("open"));
+$("navLinks").querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>$("navLinks").classList.remove("open")));
+document.addEventListener("click",e=>{const a=e.target.closest("[data-package]");if(a){$("shootType").value=a.dataset.package==="Міні"?"Портретна":a.dataset.package==="Стандарт"?"Love story":"Інше";}});
+$("bookingForm").addEventListener("submit", async e=>{
+ e.preventDefault();
+ const form=e.currentTarget;
+ const button=form.querySelector('button[type="submit"]');
+ const originalText=button.textContent;
+ button.disabled=true;
+ button.textContent="Надсилаємо...";
+ const f=new FormData(form);
+ const payload={
+   name:String(f.get("name")||"").trim(),
+   phone:String(f.get("phone")||"").trim(),
+   type:String(f.get("type")||"").trim(),
+   date:String(f.get("date")||"").trim(),
+   details:String(f.get("details")||"").trim()
+ };
+ try{
+   const response=await fetch("/.netlify/functions/telegram-booking",{
+     method:"POST",
+     headers:{"Content-Type":"application/json"},
+     body:JSON.stringify(payload)
+   });
+   const result=await response.json().catch(()=>({}));
+   if(!response.ok) throw new Error(result.error||"Не вдалося надіслати заявку.");
+   alert("Дякуємо! Заявку надіслано. Ми скоро зв'яжемося з вами.");
+   form.reset();
+ }catch(err){
+   alert("Не вдалося надіслати заявку. Перевірте публікацію на Netlify та налаштування Telegram. "+err.message);
+ }finally{
+   button.disabled=false;
+   button.textContent=originalText;
+ }
+});
+const dialog=$("adminDialog");
+$("adminOpen").addEventListener("click",()=>dialog.showModal());
+$("adminClose").addEventListener("click",()=>dialog.close());
+$("photoForm").addEventListener("submit",async e=>{
+ e.preventDefault();
+ const title=$("photoTitle").value.trim(),category=$("photoCategory").value,url=$("photoUrl").value.trim(),file=$("photoFile").files[0];
+ let photoUrl=url;
+ if(file){
+   if(!file.type.startsWith("image/")){alert("Обери файл зображення.");return}
+   try{photoUrl=await compressImage(file)}catch(err){alert("Не вдалося обробити фото. Спробуй інше зображення.");return}
+ } else if(!/^https?:\/\//i.test(url)){alert("Обери фото з комп’ютера або встав дійсне посилання https://...");return}
+ photos.unshift({title,category,url:photoUrl});savePhotos();renderGallery();e.currentTarget.reset();alert("Фото додано! Воно збережене лише в цьому браузері на цьому комп’ютері.");
+});
+function compressImage(file){return new Promise((resolve,reject)=>{
+ const reader=new FileReader();reader.onerror=reject;reader.onload=()=>{const img=new Image();img.onerror=reject;img.onload=()=>{const max=1400,scale=Math.min(1,max/Math.max(img.width,img.height)),canvas=document.createElement("canvas");canvas.width=Math.round(img.width*scale);canvas.height=Math.round(img.height*scale);canvas.getContext("2d").drawImage(img,0,0,canvas.width,canvas.height);resolve(canvas.toDataURL("image/jpeg",0.78));};img.src=reader.result;};reader.readAsDataURL(file);
+});}
+$("adminList").addEventListener("click",e=>{
+ const b=e.target.closest("[data-delete]");if(!b)return;
+ const i=Number(b.dataset.delete);if(confirm("Видалити це фото з галереї?")){photos.splice(i,1);savePhotos();renderGallery();}
+});
+function loadSettings(){
+ try{const s=JSON.parse(localStorage.getItem("photoStudioSettings")||"{}");
+ if(s.instagram){$("instagramLink").href=s.instagram;$("instagramLink").textContent=s.instagramName||s.instagram;}
+ if(s.phone){$("phoneLink").href="tel:"+s.phone.replace(/[^\d+]/g,"");$("phoneLink").textContent=s.phone;}
+ if(s.location)$("locationText").textContent=s.location;
+ $("setInstagram").value=s.instagram||"";$("setInstagramName").value=s.instagramName||"";$("setPhone").value=s.phone||"";$("setLocation").value=s.location||"";
+ }catch{}
+}
+$("settingsForm").addEventListener("submit",e=>{
+ e.preventDefault();const s={instagram:$("setInstagram").value.trim(),instagramName:$("setInstagramName").value.trim(),phone:$("setPhone").value.trim(),location:$("setLocation").value.trim()};
+ localStorage.setItem("photoStudioSettings",JSON.stringify(s));loadSettings();alert("Контакти збережено в цьому браузері.");
+});
+loadSettings();
+</script>
+</body>
+</html>
