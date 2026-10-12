@@ -93,7 +93,6 @@
         <div><label for="clientName">Ваше ім'я *</label><input id="clientName" name="name" required placeholder="Як до вас звертатися?"></div>
         <div><label for="clientPhone">Телефон або Telegram *</label><input id="clientPhone" name="phone" required placeholder="+380..." ></div>
         <div><label for="shootType">Тип зйомки *</label><select id="shootType" name="type" required><option value="">Оберіть послугу</option><option>Портретна</option><option>Весільна</option><option>Love story</option><option>Сімейна</option><option>Fashion / модельна</option><option>Подія</option><option>Контент для бренду</option><option>Інше</option></select></div>
-        <div><label for="shootDate">Бажана дата</label><input id="shootDate" name="date" type="date"></div>
         <div class="full"><label for="details">Розкажіть про вашу ідею</label><textarea id="details" name="details" placeholder="Локація, побажання, кількість людей..."></textarea></div>
         <div class="full"><button class="btn" type="submit">Підготувати заявку ↗</button></div>
         <p class="form-note full">Форма відкриє ваш поштовий застосунок для надсилання заявки. Щоб заявки зберігалися автоматично, підключіть сервіс форм або сервер — див. README.</p>
@@ -119,6 +118,18 @@
     </form>
     <h4 style="margin-top:28px">Керування галереєю</h4>
     <div id="adminList" class="admin-list"></div>
+    <h4 style="margin-top:28px">Керування тарифами</h4>
+    <p>Тут можна змінювати назву пакета, опис, ціну та список послуг.</p>
+    <div id="priceAdminList" class="admin-list"></div>
+    <form class="admin-form" id="priceForm" style="margin-top:16px">
+      <input id="priceEditIndex" type="hidden" value="">
+      <div><label for="priceName">Назва тарифу</label><input id="priceName" required placeholder="Наприклад, Міні"></div>
+      <div><label for="priceAmount">Ціна</label><input id="priceAmount" required placeholder="1500"></div>
+      <div class="full"><label for="priceDesc">Опис</label><input id="priceDesc" required placeholder="Короткий опис пакета"></div>
+      <div class="full"><label for="priceItems">Що входить (кожен пункт з нового рядка)</label><textarea id="priceItems" rows="4" required placeholder="30 хвилин зйомки&#10;10 фото в обробці"></textarea></div>
+      <div><label><input id="priceFeatured" type="checkbox"> Позначити як популярний</label></div>
+      <div class="full" style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn" type="submit" id="priceSaveBtn">Зберегти тариф</button><button class="btn outline" type="button" id="priceCancelBtn">Очистити форму</button></div>
+    </form>
     <h4 style="margin-top:28px">Контакти сайту</h4>
     <form class="admin-form" id="settingsForm">
       <div><label for="setInstagram">Instagram URL</label><input id="setInstagram" type="url" placeholder="https://instagram.com/username"></div>
@@ -140,11 +151,14 @@ const initialPhotos = [
   {title:"На природі",category:"Портрети",url:"https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1100&q=85"},
   {title:"Стиль",category:"Fashion",url:"https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1100&q=85"}
 ];
-const priceData = [
+const defaultPriceData = [
  {name:"Міні",desc:"Коротка персональна зйомка",price:"1 000",unit:"грн",items:["30 хвилин зйомки","10 фото в авторській обробці","Допомога з позуванням"]},
  {name:"Стандарт",desc:"Для портретів та love story",price:"2 000",unit:"грн",items:["60 хвилин зйомки","25 фото в авторській обробці","Допомога з образами"],featured:true},
  {name:"Преміум",desc:"Для подій та особливих історій",price:"4 000",unit:"грн",items:["До 2 годин зйомки","50 фото в авторській обробці","Індивідуальна концепція"]}
 ];
+function loadPrices(){try{return JSON.parse(localStorage.getItem("photoStudioPrices"))||defaultPriceData.map(p=>({...p,items:[...p.items]}))}catch{return defaultPriceData.map(p=>({...p,items:[...p.items]}))}}
+let priceData=loadPrices();
+function savePrices(){localStorage.setItem("photoStudioPrices",JSON.stringify(priceData));}
 const $ = id => document.getElementById(id);
 const escapeHtml = value => String(value).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 function loadPhotos(){try{return JSON.parse(localStorage.getItem("photoStudioPhotos"))||initialPhotos.slice()}catch{return initialPhotos.slice()}}
@@ -155,8 +169,11 @@ function renderGallery(){
   $("adminList").innerHTML=photos.length?photos.map((p,i)=>`<div class="admin-row"><img src="${escapeHtml(p.url)}" alt=""><div class="grow"><strong>${escapeHtml(p.title)}</strong><small>${escapeHtml(p.category)} · ${escapeHtml(p.url)}</small></div><button class="danger" data-delete="${i}">Видалити</button></div>`).join(""):'<div class="empty">Галерея порожня.</div>';
 }
 function renderPrices(){
- $("prices").innerHTML=priceData.map(p=>`<article class="price-card ${p.featured?'featured':''}">${p.featured?'<span class="tag">Популярний</span>':''}<h3>${p.name}</h3><p>${p.desc}</p><div class="price">${p.price} <small>${p.unit}</small></div><ul>${p.items.map(x=>`<li>${x}</li>`).join("")}</ul><a class="btn ${p.featured?'':'outline'}" href="#booking" data-package="${p.name}">Обрати пакет</a></article>`).join("");
+ $("prices").innerHTML=priceData.map(p=>`<article class="price-card ${p.featured?'featured':''}">${p.featured?'<span class="tag">Популярний</span>':''}<h3>${escapeHtml(p.name)}</h3><p>${escapeHtml(p.desc)}</p><div class="price">${escapeHtml(p.price)} <small>${escapeHtml(p.unit||"грн")}</small></div><ul>${p.items.map(x=>`<li>${escapeHtml(x)}</li>`).join("")}</ul><a class="btn ${p.featured?'':'outline'}" href="#booking" data-package="${escapeHtml(p.name)}">Обрати пакет</a></article>`).join("");
+ renderPriceAdmin();
 }
+function renderPriceAdmin(){const box=$("priceAdminList");if(!box)return;box.innerHTML=priceData.map((p,i)=>`<div class="admin-row"><div class="grow"><strong>${escapeHtml(p.name)} — ${escapeHtml(p.price)} грн</strong><small>${escapeHtml(p.desc)}</small></div><button type="button" class="btn outline" data-price-edit="${i}">Змінити</button><button type="button" class="danger" data-price-delete="${i}">Видалити</button></div>`).join("")||'<div class="empty">Тарифів поки немає.</div>';}
+function resetPriceForm(){$("priceForm").reset();$("priceEditIndex").value="";$("priceSaveBtn").textContent="Зберегти тариф";}
 renderGallery();renderPrices();$("year").textContent=new Date().getFullYear();
 $("menuBtn").addEventListener("click",()=>$("navLinks").classList.toggle("open"));
 $("navLinks").querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>$("navLinks").classList.remove("open")));
@@ -173,7 +190,6 @@ $("bookingForm").addEventListener("submit", async e=>{
    name:String(f.get("name")||"").trim(),
    phone:String(f.get("phone")||"").trim(),
    type:String(f.get("type")||"").trim(),
-   date:String(f.get("date")||"").trim(),
    details:String(f.get("details")||"").trim()
  };
  try{
@@ -194,7 +210,13 @@ $("bookingForm").addEventListener("submit", async e=>{
  }
 });
 const dialog=$("adminDialog");
-$("adminOpen").addEventListener("click",()=>dialog.showModal());
+const ADMIN_PASSWORD = "654245";
+$("adminOpen").addEventListener("click",()=>{
+ const entered = window.prompt("Введіть пароль для адмін-панелі:");
+ if (entered === null) return;
+ if (entered === ADMIN_PASSWORD) dialog.showModal();
+ else alert("Неправильний пароль.");
+});
 $("adminClose").addEventListener("click",()=>dialog.close());
 $("photoForm").addEventListener("submit",async e=>{
  e.preventDefault();
@@ -212,6 +234,18 @@ function compressImage(file){return new Promise((resolve,reject)=>{
 $("adminList").addEventListener("click",e=>{
  const b=e.target.closest("[data-delete]");if(!b)return;
  const i=Number(b.dataset.delete);if(confirm("Видалити це фото з галереї?")){photos.splice(i,1);savePhotos();renderGallery();}
+});
+$("priceForm").addEventListener("submit",e=>{
+ e.preventDefault();const idx=$("priceEditIndex").value;const item={name:$("priceName").value.trim(),desc:$("priceDesc").value.trim(),price:$("priceAmount").value.trim(),unit:"грн",items:$("priceItems").value.split("\n").map(x=>x.trim()).filter(Boolean),featured:$("priceFeatured").checked};
+ if(!item.items.length){alert("Додай хоча б один пункт послуг.");return;}
+ if(idx==="")priceData.push(item);else priceData[Number(idx)]=item;
+ savePrices();renderPrices();resetPriceForm();alert("Тариф збережено в цьому браузері.");
+});
+$("priceCancelBtn").addEventListener("click",resetPriceForm);
+$("priceAdminList").addEventListener("click",e=>{
+ const edit=e.target.closest("[data-price-edit]");const del=e.target.closest("[data-price-delete]");
+ if(edit){const i=Number(edit.dataset.priceEdit),p=priceData[i];$("priceEditIndex").value=String(i);$("priceName").value=p.name;$("priceAmount").value=p.price;$("priceDesc").value=p.desc;$("priceItems").value=p.items.join("\n");$("priceFeatured").checked=!!p.featured;$("priceSaveBtn").textContent="Оновити тариф";$("priceName").focus();}
+ if(del){const i=Number(del.dataset.priceDelete);if(confirm("Видалити тариф «"+priceData[i].name+"»?")){priceData.splice(i,1);savePrices();renderPrices();resetPriceForm();}}
 });
 function loadSettings(){
  try{const s=JSON.parse(localStorage.getItem("photoStudioSettings")||"{}");
